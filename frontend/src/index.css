@@ -1,0 +1,100 @@
+body {
+    margin: 0;
+    background-color: #3E6259;
+    font-family: 'Lato', sans-serif;
+}
+
+header {
+    background-color: #5B8266;
+}
+
+header .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 10px 20px;
+}
+
+header a {
+    text-decoration: none;
+    color: black;
+}
+
+.pages {
+    margin: 0 auto;
+    max-width: 1400px;
+    padding: 20px;
+}
+
+.home {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 100px;
+}
+
+.task-details {
+    background-color: #AEF6C7;
+    border-radius: 4px;
+    margin: 20px auto;
+    padding: 20px;
+    position: relative;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.task-details h4 {
+    margin: 0 0 10px 0;
+    font-size: 1.2em;
+}
+
+.task-details p {
+    margin: 0;
+    font-size: 0.9em;
+}
+
+.task-details span {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: whitesmoke;
+    border-radius: 50%;
+    padding: 6px;
+    cursor: pointer;
+}
+
+label, input {
+    display: block;
+}
+
+input {
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    border: 1px solid white;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+form button {
+    margin-top: 5px;
+    padding: 10px;
+    border: 0;
+    border-radius: 4px;
+    color: #212922;
+    cursor: pointer;
+}
+
+input.error {
+    border: 1px solid red;
+}
+
+div.error {
+    padding: 10px;
+    background-color: whitesmoke;
+    border: 1px solid red;
+    color: red;
+    border-radius: 4px;
+    margin: 10px 0;
+}
