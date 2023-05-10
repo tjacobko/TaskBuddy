@@ -7,13 +7,14 @@ const TaskForm = () => {
     const [title, setTitle] = useState("")
     const [due, setDue] = useState("")
     const [time, setTime] = useState("")
+    const [description, setDescription] = useState("")
     const [error, setError] = useState(null)
     const [emptyFields, setEmptyFields] = useState([])
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const task = {title, due, time}
+        const task = {title, due, time, description}
 
         const response = await fetch("/api/tasks", {
             method: "POST",
@@ -32,6 +33,7 @@ const TaskForm = () => {
             setTitle("")
             setDue("")
             setTime("")
+            setDescription("")
             setError(null)
             setEmptyFields([])
             console.log("Task Created", json)
@@ -64,6 +66,13 @@ const TaskForm = () => {
                 type="time"
                 onChange={(e) => setTime(e.target.value)}
                 value={time}
+            />
+
+            <label>Description (optional): </label>
+            <input 
+                type="string"
+                onChange={(e) => setDescription(e.target.value)}
+                value={description}
             />
 
             <button>Submit New Task</button>

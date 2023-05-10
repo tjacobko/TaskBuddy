@@ -8,9 +8,26 @@ const getTasks = async (req, res) => {
     res.status(200).json(tasks)
 }
 
+// Gets a single task
+const getTask = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.isValidObjectId(id)) {
+        return res.status(400).json({error: "Invalid ID"})
+    }
+
+    const task = await taskModel.findById({_id: id})
+
+    if (!task) {
+        return res.status(400).json({error: "Workout not found"})
+    }
+
+    res.status(200).json(task)
+}
+
 // Posts a single task
 const createTask = async (req, res) => {
-    const {title, due, time} = req.body
+    const {title, due, time, description} = req.body
 
     const emptyFields = []
 
@@ -25,7 +42,7 @@ const createTask = async (req, res) => {
     }
 
     try {
-        const task = await taskModel.create({title, due, time})
+        const task = await taskModel.create({title, due, time, description})
 
         res.status(200).json(task)
     }
@@ -53,6 +70,7 @@ const deleteTask = async (req, res) => {
 
 module.exports = {
     getTasks,
+    getTask,
     createTask,
     deleteTask
 }

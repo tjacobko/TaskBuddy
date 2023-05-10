@@ -41,6 +41,7 @@ header a {
     padding: 20px;
     position: relative;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
 }
 
 .task-details h4 {
@@ -97,4 +98,28 @@ div.error {
     color: red;
     border-radius: 4px;
     margin: 10px 0;
+}
+
+.task {
+    background-color: #AEF6C7;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.task h1 {
+    margin: 0 0 10px 0;
+    font-size: 2em;
+}
+
+.task p {
+    margin: 0;
+    font-size: 1em;
+}
+
+.description {
+    margin-top: 10px;
+}
+
+.description h3, p {
+    margin: 0;
 }
