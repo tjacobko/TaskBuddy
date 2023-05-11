@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useTasksContext } from '../hooks/useTasksContext'
+import { useTaskDetailsContext } from '../hooks/useTaskDetailsContext'
 
 // components
 import TaskDetails from '../components/TaskDetails'
@@ -7,6 +8,7 @@ import TaskForm from '../components/TaskForm'
 
 const Home = () => {
     const {tasks, dispatch} = useTasksContext()
+    const { taskDispatch } = useTaskDetailsContext()
 
     useEffect(() => {
         const fetchTasks = async () => {
@@ -15,11 +17,12 @@ const Home = () => {
 
             if (response.ok) {
                 dispatch({type: "SET_TASKS", payload: json})
+                taskDispatch({type: "CLEAR_TASK", payload: null})
             }
         }
 
         fetchTasks()
-    }, [dispatch])
+    }, [dispatch, taskDispatch])
 
     return (
         <div className="home">

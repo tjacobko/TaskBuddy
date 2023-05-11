@@ -104,6 +104,9 @@ div.error {
     background-color: #AEF6C7;
     padding: 20px;
     border-radius: 4px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
 }
 
 .task h1 {

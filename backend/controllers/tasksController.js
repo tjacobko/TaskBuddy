@@ -68,9 +68,43 @@ const deleteTask = async (req, res) => {
     res.status(200).json(task)
 }
 
+// PATCH a single task
+const patchTask = async (req, res) => {
+    const { id } = req.params
+
+    if (!mongoose.isValidObjectId) {
+        return res.status(400).json({error: "Invalid ID"})
+    }
+
+    // Checking if title and due are not within request body
+    const { title, due } = req.body
+    const emptyFields = []
+
+    if (!title) {
+        emptyFields.push("title")
+    }
+    if (!due) {
+        emptyFields.push("due")
+    }
+    if (emptyFields.length > 0) {
+        return res.status(400).json({error: "Please fill out all required fields", emptyFields})
+    }
+
+    const task = await taskModel.findOneAndUpdate({_id: id}, {
+        ...req.body
+    })
+
+    if (!task) {
+        return res.status(400).json({error: "Could not update task"})
+    }
+
+    res.status(200).json(task)
+}
+
 module.exports = {
     getTasks,
     getTask,
     createTask,
-    deleteTask
+    deleteTask,
+    patchTask
 }

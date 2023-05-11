@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useParams } from 'react-router-dom'
+import { useTaskDetailsContext } from '../hooks/useTaskDetailsContext'
 
-// date-fns
-import format from 'date-fns/format'
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+// components
+import Details from '../components/Details'
+import TaskUpdateForm from '../components/TaskUpdateForm'
 
 const Task = () => {
-    const [task, setTask] = useState(null)
+    const {task, taskDispatch} = useTaskDetailsContext()
 
     const { id } = useParams()
 
@@ -16,30 +17,17 @@ const Task = () => {
             const json = await response.json()
 
             if (response.ok) {
-                setTask(json)
+                taskDispatch({type: "SET_TASK", payload: json})
             }
         }
 
         fetchTask()
-    }, [id])
-
-    if (!task) {
-        return <h1>Loading Task Details</h1>
-    }
+    }, [taskDispatch, id, task])
 
     return (
         <div className="task">
-            <h1>{task.title}</h1>
-            <p><strong>Due Date: </strong>{format(new Date(task.due.replace(/-/, '/').replace(/T.+/, '')), "MM/dd/yyyy")}</p>
-            <p>Task Created: {formatDistanceToNow(new Date(task.createdAt), { addSuffix: true })}</p>
-            {
-                task.description
-                &&
-                <div className="description">
-                    <h3>Description:</h3>
-                    <p>{task.description}</p>
-                </div>
-            }
+            {task && <Details task={task} />}
+            {task && <TaskUpdateForm task={task} />}
         </div>
     )
 }

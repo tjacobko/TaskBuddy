@@ -3,7 +3,8 @@ const {
     getTasks,
     getTask,
     createTask,
-    deleteTask
+    deleteTask,
+    patchTask
 } = require('../controllers/tasksController')
 
 const router = express.Router()
@@ -19,5 +20,8 @@ router.post("/", createTask)
 
 // DELETE a single task
 router.delete("/:id", deleteTask)
+
+// PATCH a single task
+router.patch("/:id", patchTask)
 
 module.exports = router
